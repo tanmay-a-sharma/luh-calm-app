@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 24,
+        backgroundColor: '#093671',
       },
       paragraph: {
         margin: 24,
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
         textAlign: 'center',
+        color: '#c0af46',
       },
       logo: {
         height: 128,

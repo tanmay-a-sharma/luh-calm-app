@@ -4,7 +4,7 @@ export default function LocalFilesReminder() {
   return (
     <View style={styles.container}>
       <Text style={styles.paragraph}>
-        Local files and assets can be imported by dragging and dropping them into the editor
+        This is going to be the new AKPsi app
       </Text>
       <Image style={styles.logo} source={require('../assets/snack-icon.png')} />
     </View>
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
+    backgroundColor: '#093671',
   },
   paragraph: {
     margin: 24,
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: '#c0af46',
   },
   logo: {
     height: 128,
