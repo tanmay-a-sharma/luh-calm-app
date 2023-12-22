@@ -1,9 +1,11 @@
 import React from 'react';
 import {
+  Alert,
+  Button,
   SafeAreaView,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
 
 // You can import supported modules from npm
@@ -17,17 +19,27 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View>
+
         <Text style={styles.paragraph}>
           I love Tanmay Sharma
         </Text>
+
         <Card>
           <LocalFilesReminder />
         </Card>
+
         <Card>
           <TanmayContainer />
         </Card>
+
+        <Button
+          title= "Login"
+          color = "#c0af46"
+          onPress={() => Alert.alert('Simple Button pressed')}
+        />
         
       </View>
+      
     </SafeAreaView>
   );
 }
