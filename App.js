@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   Alert,
-  Button,
   SafeAreaView,
   StyleSheet,
   Text,
-  View,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 // You can import supported modules from npm
@@ -32,11 +32,18 @@ export default function App() {
           <TanmayContainer />
         </Card>
 
-        <Button
-          title= "Login"
-          color = "#c0af46"
-          onPress={() => Alert.alert('Simple Button pressed')}
-        />
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#c0af46',
+            padding: 10,
+            alignItems: 'center',
+          }}
+          onPress={() => Alert.alert('Button pressed')}
+        >
+
+          <Text style={{ color: '#000000' }}>LOGIN</Text>
+
+        </TouchableOpacity>
         
       </View>
       
