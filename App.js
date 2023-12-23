@@ -39,6 +39,7 @@ export default function App() {
           padding: 10,
           width: '50%', // Percentage width
           alignItems: 'center',
+          borderRadius: 8,
         }}
         onPress={() => Alert.alert('Button pressed')}>
   
