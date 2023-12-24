@@ -13,7 +13,6 @@ import { Card } from 'react-native-paper';
 
 // or any files within the Snack
 import LocalFilesReminder from './components/AssetExample';
-import TanmayContainer from './components/TanmayReminder';
 
 export default function App() {
   return (
@@ -28,9 +27,7 @@ export default function App() {
           <LocalFilesReminder />
         </Card>
 
-        <Card>
-          <TanmayContainer />
-        </Card>
+        
 
         <View style={{ width: '100%', alignItems: 'center' }}>
         <TouchableOpacity
