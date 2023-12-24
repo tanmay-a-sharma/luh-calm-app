@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 
-export default function LocalFilesReminder() {
+export default function Landing() {
   return (
     <View style={styles.container}>
       <Text style={styles.paragraph}>

@@ -14,7 +14,7 @@ import { Card } from 'react-native-paper';
 
 
 // or any files within the Snack
-import LocalFilesReminder from './components/AssetExample';
+import Landing from './components/LandingPage';
 
 function HomeScreen({navigation}) {
   return (
@@ -24,7 +24,7 @@ function HomeScreen({navigation}) {
           I love Tanmay Sharma
         </Text>
         <Card>
-          <LocalFilesReminder />
+          <Landing />
         </Card>
         <View style={{ width: '100%', alignItems: 'center' }}>
         <TouchableOpacity
