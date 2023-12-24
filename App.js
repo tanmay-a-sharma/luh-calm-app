@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Alert,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -9,26 +8,24 @@ import {
 } from 'react-native';
 
 // You can import supported modules from npm
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Card } from 'react-native-paper';
+
 
 // or any files within the Snack
 import LocalFilesReminder from './components/AssetExample';
 
-export default function App() {
+function HomeScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-
         <Text style={styles.paragraph}>
           I love Tanmay Sharma
         </Text>
-
         <Card>
           <LocalFilesReminder />
         </Card>
-
-        
-
         <View style={{ width: '100%', alignItems: 'center' }}>
         <TouchableOpacity
         style={{
@@ -38,20 +35,38 @@ export default function App() {
           alignItems: 'center',
           borderRadius: 8,
         }}
-        onPress={() => Alert.alert('Button pressed')}>
-  
+        onPress={() => navigation.navigate('Login')}>
         <Text style={{ color: '#000000' }}>LOGIN</Text>
-      
       </TouchableOpacity>
-          
-
         </View>
-        
       </View>
-      
     </SafeAreaView>
   );
 }
+
+function LoginScreen(){
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Login Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+
+function App(){
+  return (<NavigationContainer>
+    <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Login" component={LoginScreen}/>
+      </Stack.Navigator>
+
+  </NavigationContainer>)
+
+}
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
