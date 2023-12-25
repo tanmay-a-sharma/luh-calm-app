@@ -15,6 +15,7 @@ import { Card } from 'react-native-paper';
 
 // or any files within the Snack
 import Landing from './components/LandingPage';
+import LoginScreen from './components/Login/LoginScreen';
 
 function HomeScreen({navigation}) {
   return (
@@ -44,13 +45,7 @@ function HomeScreen({navigation}) {
   );
 }
 
-function LoginScreen(){
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Login Screen</Text>
-    </View>
-  );
-}
+
 
 const Stack = createNativeStackNavigator();
 

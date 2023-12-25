@@ -6,7 +6,7 @@ export default function Landing() {
       <Text style={styles.paragraph}>
         This is going to be the new AKPsi app
       </Text>
-      <Image style={styles.logo} source={require('../assets/snack-icon.png')} />
+      <Image style={styles.logo} source={require('../assets/Logo.png')} />
     </View>
   );
 }
