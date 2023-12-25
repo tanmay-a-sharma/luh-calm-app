@@ -8,7 +8,7 @@ const activeSmokerSchema = mongoose.Schema({
     },
     times: {
         type: [Number],
-        required: [true, 'Please select a time']
+        required: [true, 'Please select at least one time']
     },
     // role: {
     //     type: String,
