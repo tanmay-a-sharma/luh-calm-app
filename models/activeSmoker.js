@@ -6,9 +6,9 @@ const activeSmokerSchema = mongoose.Schema({
         type: String,
         required: [true, 'No name received, please login']
     },
-    time: {
-        type: String,
-        required: [true, 'Please add a time']
+    times: {
+        type: [Number],
+        required: [true, 'Please select a time']
     },
     // role: {
     //     type: String,
