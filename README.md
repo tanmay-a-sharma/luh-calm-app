@@ -1,2 +1,2 @@
 # luh-calm-app
- a react native application allowing my business fraternity to execute "courts" in an organized and informational manner
+ a mobile application allowing my business fraternity to automate all fraternal procedures
