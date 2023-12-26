@@ -12,12 +12,42 @@ function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('https://your-backend-api.com/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        // Handle successful login, e.g., navigate to another screen or store token
+        console.log('Login successful:', data);
+        // Example: navigation.navigate('ProfileScreen');
+      } else {
+        // Handle login failure
+        Alert.alert('Login Failed', data.message || 'Invalid credentials');
+      }
+    } catch (error) {
+      // Handle network errors
+      console.error('Login error:', error);
+      Alert.alert('Error', 'Unable to connect to the server');
+    }
+  };
+  
+
+
   // Function to handle the login logic will go here
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.loginContainer}>
-        <Text style={styles.loginTitle}>Login to Your Account</Text>
+        <Text style={styles.loginTitle}>Login to Your Profile</Text>
         <TextInput
           style={styles.input}
           placeholder="Username"
@@ -37,14 +67,31 @@ function LoginScreen({ navigation }) {
           style={styles.loginButton}
           onPress={() => {/* Function to handle login */}}
         >
-          <Text style={styles.loginButtonText}>LOGIN</Text>
+          <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
       </View>
+
+      <View style={styles.buttonSpacer} />
+
+
+      <View style={styles.registerContainer}>
+        <TouchableOpacity
+          style={styles.registerButton}
+          onPress={() => navigation.navigate('RegisterScreen')}>
+          <Text style={styles.registerButtonText}>Create My Profile</Text>
+        </TouchableOpacity>
+      </View>
+     
     </SafeAreaView>
   );
 }
 
+
+
 const styles = StyleSheet.create({
+  buttonSpacer: {
+    height: 15, // Or any other value that gives desired space
+  },
   container: {
     flex: 1,
     backgroundColor: '#093671',
@@ -79,6 +126,24 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   loginButtonText: {
+    color: '#000000',
+    fontWeight: 'bold',
+  },
+  registerContainer: {
+    width: '80%', // Same width as loginContainer
+    alignItems: 'center', // Center the button
+    // Do not include background color or padding like in loginContainer
+  },
+  registerButton: {
+    // Same style as loginButton
+    backgroundColor: '#c0af46',
+    padding: 10,
+    width: '100%', // Button takes full width of its container
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  registerButtonText: {
+    // Style for the register button text
     color: '#000000',
     fontWeight: 'bold',
   },
