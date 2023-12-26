@@ -1,34 +1,33 @@
 import React, { useState } from 'react';
 import {
-  Alert,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
+      SafeAreaView,
+      StyleSheet,
+      Text,
+      TextInput,
+      TouchableOpacity,
+      View
 } from 'react-native';
 
-
-function LoginScreen({ navigation }) {
+function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmedPassword, setConfirmedPassowrd] = useState('');
 
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     try {
-      const response = await fetch('', { // insert endpoint
+      const response = await fetch('https://your-backend-api.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, confirmedPassword}),
       });
   
       const data = await response.json();
   
       if (response.ok) {
-        // Handle successful login, ex, navigate to another screen or store token
+        // Handle successful login, e.g., navigate to another screen or store token
         console.log('Login successful:', data);
         // Example: navigation.navigate('ProfileScreen');
       } else {
@@ -41,8 +40,6 @@ function LoginScreen({ navigation }) {
       Alert.alert('Error', 'Unable to connect to the server');
     }
   };
-  
-
 
   // Function to handle the login logic will go here
 
@@ -65,30 +62,24 @@ function LoginScreen({ navigation }) {
           onChangeText={setPassword}
           secureTextEntry
         />
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => {/* Function to handle login */}}
-        >
-          <Text style={styles.loginButtonText}>Login</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.buttonSpacer} />
-
-
-      <View style={styles.registerContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm Password"
+          placeholderTextColor="#c0af46"
+          value={confirmedPassword}
+          onChangeText={setConfirmedPassowrd}
+          secureTextEntry
+        />
         <TouchableOpacity
           style={styles.registerButton}
-          onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.registerButtonText}>Create My Profile</Text>
+          onPress={() => {/* Function to handle login */}}
+        >
+          <Text style={styles.registerButtonText}>Register</Text>
         </TouchableOpacity>
       </View>
-     
     </SafeAreaView>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   buttonSpacer: {
@@ -151,4 +142,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default RegisterScreen;

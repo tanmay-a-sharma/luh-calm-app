@@ -16,6 +16,7 @@ import { Card } from 'react-native-paper';
 // or any files within the Snack
 import Landing from './components/LandingPage';
 import LoginScreen from './components/Login/LoginScreen';
+import RegisterScreen from './components/Register/RegisterScreen';
 
 function HomeScreen({navigation}) {
   return (
@@ -55,6 +56,7 @@ function App(){
     <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen}/>
+        <Stack.Screen name="Register" component={RegisterScreen}/>
       </Stack.Navigator>
 
   </NavigationContainer>)
