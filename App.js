@@ -14,9 +14,9 @@ import { Card } from 'react-native-paper';
 
 
 // or any files within the Snack
-import Landing from './components/LandingPage';
-import LoginScreen from './components/Login/LoginScreen';
-import RegisterScreen from './components/Register/RegisterScreen';
+import Landing from './app/LandingPage';
+import LoginScreen from './app/Login/LoginScreen';
+import RegisterScreen from './app/Register/RegisterScreen';
 
 function HomeScreen({navigation}) {
   return (
