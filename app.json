@@ -25,6 +25,9 @@
     },
     "web": {
       "favicon": "./assets/LogoBlue.png"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
