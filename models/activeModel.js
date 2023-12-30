@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 // all the user-required fields
-const activeSchema = mongoose.Schema({
+const activeSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Please add a name']
@@ -20,10 +20,40 @@ const activeSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add a password']
     },
-    // role: {
-    //     type: String,
-    //     required: [true, 'Please add a role']   // default role will be send using the customer controller
-    // },
+    status:{
+        type:String,
+        required: [true, 'Please indicate AKPsi status']
+    },
+    verified:{
+        type:Boolean,
+        default: false,
+    },
+    verificationToken:String,
+    profileImage:String,
+    userDescription:{
+        type:String,
+        default:null
+    },
+    connections:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref: "activeSchema"
+        }
+    ],
+    connectionRequests:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            res:"activeSchema"
+        }
+    ],
+    createdAt:{
+        type:Date,
+        default: Date.now
+    },
+    role: {
+        type: String,
+        required: [true, 'Please add a role']   // default role will be send using the customer controller
+    },
     // phoneNumber: {  // Test on fronted whether the input is in number or not.
     //     type: Number,
     //     required: [true, 'Please add a phone number']
@@ -36,4 +66,5 @@ const activeSchema = mongoose.Schema({
 }
 )
 
-module.exports = mongoose.model('Active', activeSchema)
+const Active = mongoose.model('Active', activeSchema);
+module.exports = Active;
