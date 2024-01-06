@@ -17,6 +17,7 @@ import { Card } from 'react-native-paper';
 import Landing from './app/LandingPage';
 import LoginScreen from './app/Login/LoginScreen';
 import RegisterScreen from './app/Register/RegisterScreen';
+import PasswordResetScreen from './app/ForgotPassword/PasswordResetScreen';
 
 function HomeScreen({navigation}) {
   return (
@@ -57,6 +58,7 @@ function App(){
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen}/>
         <Stack.Screen name="Register" component={RegisterScreen}/>
+        <Stack.Screen name= "ResetPassword" component={PasswordResetScreen}/>
       </Stack.Navigator>
 
   </NavigationContainer>)

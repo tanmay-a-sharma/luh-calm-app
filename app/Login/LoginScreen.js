@@ -84,11 +84,20 @@ function LoginScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <Pressable style={{ marginTop: 15 }}>
-        <Text style={{ textAlign: "center", color: "gray", fontSize: 16 }}>
+      <Pressable
+        style={{ marginTop: 15 }}
+        onPress={() => navigation.navigate("ResetPassword")} // Added onPress event handler here
+      >
+        <Text style={{
+            textAlign: "center",
+            color: "white",
+            fontSize: 16,
+            textDecorationLine: 'underline'
+        }}>
           Forgot password?
         </Text>
       </Pressable>
+
     </SafeAreaView>
   );
 }
