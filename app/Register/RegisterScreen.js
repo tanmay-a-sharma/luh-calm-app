@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import {
-      SafeAreaView,
-      StyleSheet,
-      Text,
-      TextInput,
-      TouchableOpacity,
-      View
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 function RegisterScreen({ navigation }) {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmedPassword, setConfirmedPassowrd] = useState('');
 
@@ -21,7 +21,7 @@ function RegisterScreen({ navigation }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password, confirmedPassword}),
+        body: JSON.stringify({ email, password, confirmedPassword}),
       });
   
       const data = await response.json();
@@ -49,10 +49,10 @@ function RegisterScreen({ navigation }) {
         <Text style={styles.loginTitle}>Login to Your Profile</Text>
         <TextInput
           style={styles.input}
-          placeholder="Username"
+          placeholder="Email"
           placeholderTextColor="#c0af46"
-          value={username}
-          onChangeText={setUsername}
+          value={email}
+          onChangeText={setEmail}
         />
         <TextInput
           style={styles.input}
