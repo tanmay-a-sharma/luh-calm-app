@@ -47,7 +47,7 @@ function RegisterScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.loginContainer}>
-        <Text style={styles.loginTitle}>Login to Your Profile</Text>
+        <Text style={styles.loginTitle}>Create Your Profile</Text>
         
         <TextInput
           style={styles.input}

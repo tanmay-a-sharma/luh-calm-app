@@ -11,8 +11,8 @@ import {
 } from "react-native";
 
 function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, checkEmail] = useState("");
+  const [password, checkPassword] = useState("");
 
   const handleLogin = async () => {
     try {
@@ -53,14 +53,14 @@ function LoginScreen({ navigation }) {
           placeholder="Email"
           placeholderTextColor="#c0af46"
           value={email}
-          onChangeText={setEmail}
+          onChangeText={checkEmail}
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#c0af46"
           value={password}
-          onChangeText={setPassword}
+          onChangeText={checkPassword}
           secureTextEntry
         />
         <TouchableOpacity
@@ -80,7 +80,7 @@ function LoginScreen({ navigation }) {
           style={styles.registerButton}
           onPress={() => navigation.navigate("Register")}
         >
-          <Text style={styles.registerButtonText}>Create My Profile</Text>
+          <Text style={styles.registerButtonText}>I don't have a profile</Text>
         </TouchableOpacity>
       </View>
 
