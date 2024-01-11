@@ -12,7 +12,7 @@ function RegisterScreen({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassowrd] = useState('');
+  const [confirmedPassword, setConfirmedPassword] = useState('');
 
 
   const handleRegister = async () => {
@@ -22,7 +22,7 @@ function RegisterScreen({ navigation }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password, confirmedPassword}),
+        body: JSON.stringify({ name, email, password, confirmPassword}),
       });
   
       const data = await response.json();
@@ -77,7 +77,7 @@ function RegisterScreen({ navigation }) {
           placeholder="Confirm Password"
           placeholderTextColor="#c0af46"
           value={confirmedPassword}
-          onChangeText={setConfirmedPassowrd}
+          onChangeText={setConfirmedPassword}
           secureTextEntry
         />
         <TouchableOpacity
