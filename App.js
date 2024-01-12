@@ -14,10 +14,10 @@ import { Card } from 'react-native-paper';
 
 
 // or any files within the Snack
+import PasswordResetScreen from './app/ForgotPassword/PasswordResetScreen';
 import Landing from './app/LandingPage';
 import LoginScreen from './app/Login/LoginScreen';
 import RegisterScreen from './app/Register/RegisterScreen';
-import PasswordResetScreen from './app/ForgotPassword/PasswordResetScreen';
 
 function HomeScreen({navigation}) {
   return (
@@ -29,19 +29,41 @@ function HomeScreen({navigation}) {
         <Card>
           <Landing />
         </Card>
-        <View style={{ width: '100%', alignItems: 'center' }}>
-        <TouchableOpacity
-        style={{
-          backgroundColor: '#c0af46',
-          padding: 10,
-          width: '50%', // Percentage width
-          alignItems: 'center',
-          borderRadius: 8,
-        }}
-        onPress={() => navigation.navigate('Login')}>
-        <Text style={{ color: '#000000' }}>LOGIN</Text>
-      </TouchableOpacity>
+
+
+        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#c0af46',
+              padding: 10,
+              minWidth: 100, // Minimum width for small screens
+              maxWidth: 200, // Maximum width for large screens
+              width: '40%', // Relative width
+              alignItems: 'center',
+              borderRadius: 8,
+              margin: 5, // Space between buttons
+            }}
+            onPress={() => navigation.navigate('Login')}>
+            <Text style={{ color: '#000000' }}>Login</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#c0af46',
+              padding: 10,
+              minWidth: 100, // Minimum width for small screens
+              maxWidth: 200, // Maximum width for large screens
+              width: '40%', // Relative width
+              alignItems: 'center',
+              borderRadius: 8,
+              margin: 5, // Space between buttons
+            }}
+            onPress={() => navigation.navigate('Register')}>
+            <Text style={{ color: '#000000' }}>Register</Text>
+          </TouchableOpacity>
         </View>
+
+
       </View>
     </SafeAreaView>
   );
