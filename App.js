@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 
+
 // You can import supported modules from npm
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -21,6 +22,9 @@ import RegisterScreen from "./app/Register/RegisterScreen";
 function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
+
+      
+
       <View>
         <Text style={styles.paragraph}>I Love Tanmay Sharma</Text>
         <Card>

@@ -16,10 +16,13 @@ const activeSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please add a password"],
     },
-    pledgeClass: String,
+    pledgeClass: {
+      type: String,
+      required:[true, "Please indicate pledge class"],
+    },
     status: {
       type: String,
-      required: [true, "Please indicate AKPsi status"],
+      required: [false, "Please indicate AKPsi status"],
     },
     verified: {
       type: Boolean,
@@ -49,7 +52,7 @@ const activeSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      required: [true, "Please add a role"], // default role will be send using the customer controller
+      required: [false, "Please add a role"], // default role will be send using the customer controller
     },
     // phoneNumber: {  // Test on fronted whether the input is in number or not.
     //     type: Number,
