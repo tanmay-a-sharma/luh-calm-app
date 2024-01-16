@@ -101,16 +101,15 @@ const sendVerificationEmail = async (email, verificationToken) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "tanmayxsharma4@gmail.com",
+      user: "hi@evanweidner.com",
       pass: process.env.PASS,
     },
   });
   const mailOptions = {
-    from: "tanmayxsharma4@gmail.com",
+    from: "hi@evanweidner.com",
     to: email,
     subject: "Email Verification",
     text: `Please click the following link to verify your email: http://localhost:8000/verify/${verificationToken}`,
-
   };
 
   // send the email
