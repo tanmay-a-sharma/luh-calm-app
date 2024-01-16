@@ -48,7 +48,7 @@ app.post("/register", async (req, res) => {
     // const User = require('../models/ActiveModel.js');
 
     const db = mongoose.connection;
-
+    
     // const existingUser = await db.collection('test').find({});
 
     // existingUser.returnKey
@@ -63,7 +63,12 @@ app.post("/register", async (req, res) => {
     //   return res.status(400).json({ message: "Email is already registered" });
     // }
 
+    
+    const existingUser = await db.collection('active').findOne({email: email});
 
+    if(existingUser){
+      return res.status(400).json({message: "You already have an account!"});
+    }
 
     if (password != confirmedPassword){
       console.log("Your passwords are not the same");
