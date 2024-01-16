@@ -1,11 +1,13 @@
 import React from "react";
 import {
+  Image,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from "react-native";
+
 
 
 // You can import supported modules from npm
@@ -15,7 +17,7 @@ import { Card } from "react-native-paper";
 
 // or any files within the Snack
 import PasswordResetScreen from "./app/ForgotPassword/PasswordResetScreen";
-import Landing from "./app/LandingPage";
+import LandingScreen from "./app/Landing/LandingScreen";
 import LoginScreen from "./app/Login/LoginScreen";
 import RegisterScreen from "./app/Register/RegisterScreen";
 
@@ -28,7 +30,13 @@ function HomeScreen({ navigation }) {
       <View>
         <Text style={styles.paragraph}>I Love Tanmay Sharma</Text>
         <Card>
-          <Landing />
+          <View style={styles.landingContainer}>
+            <Text style={styles.landingParagraph}>
+              This is going to be the new AKPsi app
+            </Text>
+            <Image style={styles.landingLogo} source={require('./assets/Logo.png')} />
+
+          </View>
         </Card>
 
         <View
@@ -81,10 +89,11 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="ResetPassword" component={PasswordResetScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Landing" component={LandingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -107,4 +116,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#c0af46",
   },
+  landingContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+    backgroundColor: '#093671',
+  },
+  landingParagraph: {
+    margin: 24,
+    marginTop: 0,
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#c0af46',
+  },
+  landingLogo: {
+    height: 128,
+    width: 128,
+  }
 });

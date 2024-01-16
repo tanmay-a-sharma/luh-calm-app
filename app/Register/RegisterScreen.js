@@ -36,7 +36,7 @@ function RegisterScreen({ navigation }) {
       .then((response) => {
         console.log(response);
         Alert.alert(
-          "Registration succesful:",
+          "Registration successful:",
           "You have been registered successfully"
         );
         setName("");
@@ -52,6 +52,9 @@ function RegisterScreen({ navigation }) {
         );
         console.log("registration failed on screen", error);
       });
+
+    // axios.get("http")
+      
   };
 
   // const handleRegister = async () => {

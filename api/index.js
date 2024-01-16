@@ -146,6 +146,7 @@ app.get("/verify/:token", async (req, res) => {
         
       ]
     );
+    
 
 
 
@@ -154,7 +155,9 @@ app.get("/verify/:token", async (req, res) => {
     
 
 
-
+    // this is going to allow us to also recognize that that user
+    //  no longer has to login once they have logged in and will
+    //  be taken to the landing page
     res.status(200).json({ message: "Email verified successfully" });
   } catch (error) {
     res.status(500).json({ message: "Email verification failed" });
