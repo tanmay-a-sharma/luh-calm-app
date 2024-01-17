@@ -8,6 +8,7 @@ const nodemailer = require("nodemailer");
 const app = express();
 const port = 8000;
 const cors = require("cors");
+const bcrypt = require("bcrypt");
 const crypto = require('crypto');
 
 app.use(cors());
@@ -78,13 +79,23 @@ app.post("/register", async (req, res) => {
 
     verificationToken = crypto.randomBytes(20).toString("hex");
 
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     const newUser = new User({
       name: name,
       pledgeClass: pledgeClass,
       email: email,
-      password: password,
+      password: hashedPassword,
       verificationToken: verificationToken,
     });
+
+    // if (bcrypt.compare(password, newUser.password)) {
+    //   console.log("our encryption is danking");
+
+    //   // Passwords match
+    //   // Proceed with login
+    // }
     
 
     //await db.createCollection("active");
@@ -106,12 +117,12 @@ const sendVerificationEmail = async (email, verificationToken) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "hi@evanweidner.com",
+      user: "tanmayxsharma4@gmail.com",
       pass: process.env.PASS,
     },
   });
   const mailOptions = {
-    from: "hi@evanweidner.com",
+    from: "tanmayxsharma4@gmail.com",
     to: email,
     subject: "Email Verification",
     text: `Please click the following link to verify your email: http://localhost:8000/verify/${verificationToken}`,
