@@ -54,6 +54,10 @@ const activeSchema = new mongoose.Schema(
       type: String,
       required: [false, "Please add a role"], // default role will be send using the customer controller
     },
+    activeSemesters:{
+      type: Number,
+    
+    }
     // phoneNumber: {  // Test on fronted whether the input is in number or not.
     //     type: Number,
     //     required: [true, 'Please add a phone number']
