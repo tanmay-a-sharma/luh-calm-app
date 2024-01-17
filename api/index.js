@@ -104,6 +104,10 @@ app.post("/register", async (req, res) => {
 
     // we are going to send a verification email to the assigned user
     sendVerificationEmail(newUser.email, newUser.verificationToken);
+
+    //close db cursor
+    db.close()
+
     res.status(200).json({
       message: "Registration successful. Check your email for verification",
     });
@@ -173,6 +177,9 @@ app.get("/verify/:token", async (req, res) => {
     // this is going to allow us to also recognize that that user
     //  no longer has to login once they have logged in and will
     //  be taken to the landing page
+    
+    // close db cursor
+    db.close();
     res.status(200).json({ message: "Email verified successfully" });
   } catch (error) {
     res.status(500).json({ message: "Email verification failed" });
