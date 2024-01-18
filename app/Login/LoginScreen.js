@@ -1,46 +1,21 @@
 import React, { useState } from "react";
 import {
-  Alert,
   Pressable,
   SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
+
+
+import { handleLogin } from './auth'; // adjust the path as necessary
+
 
 function LoginScreen({ navigation }) {
   const [email, checkEmail] = useState("");
   const [password, checkPassword] = useState("");
-
-  const handleLogin = async () => {
-    try {
-      const response = await fetch("", {
-        // insert endpoint
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Handle successful login, ex, navigate to another screen or store token
-        console.log("Login successful:", data);
-        // Example: navigation.navigate('ProfileScreen');
-      } else {
-        // Handle login failure
-        Alert.alert("Login Failed", data.message || "Invalid credentials");
-      }
-    } catch (error) {
-      // Handle network errors
-      console.error("Login error:", error);
-      Alert.alert("Error", "Unable to connect to the server");
-    }
-  };
 
   // Function to handle the login logic will go here
 
@@ -66,7 +41,7 @@ function LoginScreen({ navigation }) {
         <TouchableOpacity
           style={styles.loginButton}
           onPress={() => {
-            /* Function to handle login */
+            handleLogin();
           }}
         >
           <Text style={styles.loginButtonText}>Login</Text>

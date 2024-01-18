@@ -179,3 +179,32 @@ app.get("/verify/:token", async (req, res) => {
     console.log(error);
   }
 });
+
+
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await Active.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    if (!user.verified) {
+      return res.status(401).json({ message: "Please verify your account first" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Incorrect password" });
+    }
+
+    // If the password is correct and the user is verified, proceed with the login process.
+    // You might want to create a session or generate a token here.
+
+    res.status(200).json({ message: "Login successful" });
+  } catch (error) {
+    console.log("Error logging in", error);
+    res.status(500).json({ message: "Login failed" });
+  }
+});
