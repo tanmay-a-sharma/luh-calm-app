@@ -183,8 +183,9 @@ app.get("/verify/:token", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
+    db = mongoose.connection;
     const { email, password } = req.body;
-    const user = await Active.findOne({ email });
+    const user = await db.collection("active").findOne({ email });
 
     if (!user) {
       return res.status(400).json({ message: "User not found" });
