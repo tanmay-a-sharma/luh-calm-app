@@ -34,7 +34,7 @@ function HomeScreen({ navigation }) {
             <Text style={styles.landingParagraph}>
               This is going to be the new AKPsi app
             </Text>
-            <Image style={styles.landingLogo} source={require('./assets/Logo.png')} />
+            <Image style={styles.landingLogo} source={require('./assets/logo.png')} />
 
           </View>
         </Card>
