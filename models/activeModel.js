@@ -57,7 +57,11 @@ const activeSchema = new mongoose.Schema(
     activeSemesters:{
       type: Number,
     
-    }
+    },
+      sessions: {
+          type: [String], // An array of strings
+          default: []     // Default value is an empty array
+      },
     // phoneNumber: {  // Test on fronted whether the input is in number or not.
     //     type: Number,
     //     required: [true, 'Please add a phone number']

@@ -10,6 +10,8 @@ const port = 8000;
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const AsyncStorage = require('@react-native-async-storage/async-storage');
 
 app.use(cors());
 
@@ -186,7 +188,7 @@ app.get("/verify/:token", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
-    db = mongoose.connection;
+    const db = mongoose.connection;
     const { email, password } = req.body;
     const user = await db.collection("active").findOne({ email });
 
@@ -205,6 +207,16 @@ app.post("/login", async (req, res) => {
 
     // If the password is correct and the user is verified, proceed with the login process.
     // You might want to create a session or generate a token here.
+
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+
+    await db.collection("active").updateOne(
+        { _id: user._id },
+        { $push: { sessions: token } }
+    );
+
+    //await AsyncStorage.setItem('userToken', token);
 
     res.status(200).json({ message: "Login successful" });
   } catch (error) {
