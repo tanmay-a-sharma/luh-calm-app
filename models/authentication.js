@@ -6,17 +6,16 @@ const authenticateJWT = async (req, res, next) => {
     if (token) {
         jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, user) => {
             if (err) {
+                // If the token is invalid or expired, remove it from the user's sessions
+                const db = mongoose.connection;
+                await db.collection("active").updateOne(
+                    { _id: user.id },
+                    { $pull: { sessions: token } }
+                );
                 return res.sendStatus(403);
             }
 
-            // Check if the token is in the user's sessions array
-            const db = mongoose.connection;
-            const dbUser = await db.collection("active").findOne({ _id: user.id });
-
-            if (!dbUser.sessions.includes(token)) {
-                return res.sendStatus(403);
-            }
-
+            // Attach user information to the request
             req.user = user;
             next();
         });
