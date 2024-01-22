@@ -11,7 +11,6 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const AsyncStorage = require('@react-native-async-storage/async-storage');
 
 app.use(cors());
 
@@ -216,9 +215,7 @@ app.post("/login", async (req, res) => {
         { $push: { sessions: token } }
     );
 
-    //await AsyncStorage.setItem('userToken', token);
-
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({ message: "Login successful",token: token});
   } catch (error) {
     console.log("Error logging in", error);
     res.status(500).json({ message: "Login failed" });
