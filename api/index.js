@@ -10,6 +10,7 @@ const port = 8000;
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 app.use(cors());
 
@@ -186,7 +187,7 @@ app.get("/verify/:token", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   try {
-    db = mongoose.connection;
+    const db = mongoose.connection;
     const { email, password } = req.body;
     const user = await db.collection("active").findOne({ email });
 
@@ -206,7 +207,15 @@ app.post("/login", async (req, res) => {
     // If the password is correct and the user is verified, proceed with the login process.
     // You might want to create a session or generate a token here.
 
-    res.status(200).json({ message: "Login successful" });
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+
+    await db.collection("active").updateOne(
+        { _id: user._id },
+        { $push: { sessions: token } }
+    );
+
+    res.status(200).json({ message: "Login successful",token: token});
   } catch (error) {
     console.log("Error logging in", error);
     res.status(500).json({ message: "Login failed" });

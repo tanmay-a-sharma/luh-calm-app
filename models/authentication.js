@@ -1,0 +1,25 @@
+import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+
+const authenticateJWT = async (req, res, next) => {
+    const token = req.headers.authorization;
+    if (token) {
+        jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, user) => {
+            if (err) {
+                // If the token is invalid or expired, remove it from the user's sessions
+                const db = mongoose.connection;
+                await db.collection("active").updateOne(
+                    { _id: user.id },
+                    { $pull: { sessions: token } }
+                );
+                return res.sendStatus(403);
+            }
+
+            // Attach user information to the request
+            req.user = user;
+            next();
+        });
+    } else {
+        res.sendStatus(401);
+    }
+};
