@@ -6837,6 +6837,11 @@ nullthrows@^1.1.1:
   resolved "https://registry.yarnpkg.com/nullthrows/-/nullthrows-1.1.1.tgz#7818258843856ae971eae4208ad7d7eb19a431b1"
   integrity sha512-2vPPEi+Z7WqML2jZYddDIfy5Dqb0r2fze2zTxNNknZaFpVHU3mFB3R+DWeJWGVx0ecvttSGlJTI+WG+8Z4cDWw==
 
+numpy@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/numpy/-/numpy-0.0.1.tgz#c6bbd4c49b45bd537f768a09c9220a290de41598"
+  integrity sha512-HPoSFyRtH4dRUGjI6bzeVKgfOeNtIAWLvVWMqbaNGmWKE+npdnZ6L78TEJELgZBb+9XpL6r16vOz1jaQ7YVI7Q==
+
 ob1@0.76.8:
   version "0.76.8"
   resolved "https://registry.yarnpkg.com/ob1/-/ob1-0.76.8.tgz#ac4c459465b1c0e2c29aaa527e09fc463d3ffec8"
@@ -7022,6 +7027,11 @@ p-try@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
+
+pandas@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/pandas/-/pandas-0.0.3.tgz#2a11b02074f0ffcc0729c73235572e5adbb0f1f7"
+  integrity sha512-b6b0XOuj8mvj2Kn6qfcvPmb0ILCcbuep5VYZche3730P9cXQcvarbbvWJxwXkxc3OXyGFYjJ4kozjX5ZXXMrsw==
 
 param-case@^3.0.4:
   version "3.0.4"

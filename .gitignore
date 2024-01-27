@@ -25,6 +25,9 @@ web-build/
 # dependencies
 node_modules/
 
+# student databases
+luh-frat/databases/
+
 # Expo
 .expo/
 dist/
@@ -57,3 +60,6 @@ yarn-error.*
 *.tsbuildinfo
 
 # @end expo-cli
+
+ios/
+android/
