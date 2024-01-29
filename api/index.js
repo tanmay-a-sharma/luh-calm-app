@@ -12,6 +12,8 @@ const bcrypt = require("bcrypt");
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
+const TextAnnouncement = require('../models/textAnnouncementSchema.js');
+
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -72,7 +74,7 @@ app.post("/register", async (req, res) => {
       return res.status(400).json({message: "You already have an account!"});
     }
 
-    if (password != confirmedPassword){
+    if (password !== confirmedPassword){
       console.log("Your passwords are not the same");
       return res.status(400).json({message: "Your passwords are not the same"});
     }
@@ -219,5 +221,36 @@ app.post("/login", async (req, res) => {
   } catch (error) {
     console.log("Error logging in", error);
     res.status(500).json({ message: "Login failed" });
+  }
+});
+
+app.get('/announcements', async (req, res) => {
+  try {
+    const db = mongoose.connection;
+    const announcements = await db.collection('announcements').find({}).toArray();
+    res.status(200).json(announcements);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching announcements' });
+  }
+});
+
+app.post('/announcements', async (req, res) => {
+  try {
+    const db = mongoose.connection;
+    const { title, content, author } = req.body;
+
+    const newAnnouncement = new TextAnnouncement({
+      title,
+      content,
+      author
+    });
+
+    await db.collection('announcements').insertOne(newAnnouncement);
+
+    res.status(201).json({ message: 'Announcement created successfully', announcement: newAnnouncement });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error creating announcement' });
   }
 });
