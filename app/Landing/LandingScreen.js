@@ -32,6 +32,9 @@ function LandingScreen() {
                           <Text style={styles.author}>
                                 {announcement.author}
                           </Text>
+                          <Text style={styles.time}>
+                                Posted on: {new Date(announcement.createdAt).toLocaleString()}
+                          </Text>
                     </View>
                 ))}
           </SafeAreaView>
@@ -69,6 +72,11 @@ const styles = StyleSheet.create({
             color: '#ffffff',
       },
       author: {
+            fontSize: 14,
+            fontStyle: 'italic',
+            color: '#ffffff',
+      },
+      time: {
             fontSize: 14,
             fontStyle: 'italic',
             color: '#ffffff',
