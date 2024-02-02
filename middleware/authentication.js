@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 const authenticateJWT = async (req, res, next) => {
     const token = req.headers.authorization;
@@ -23,3 +23,5 @@ const authenticateJWT = async (req, res, next) => {
         res.sendStatus(401);
     }
 };
+
+module.exports = authenticateJWT;

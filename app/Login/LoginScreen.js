@@ -29,11 +29,13 @@ function LoginScreen({ navigation }) {
           placeholderTextColor="#c0af46"
           value={email}
           onChangeText={checkEmail}
+          autoCapitalize="none"
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#c0af46"
+          autoCapitalize="none"
           value={password}
           onChangeText={checkPassword}
           secureTextEntry

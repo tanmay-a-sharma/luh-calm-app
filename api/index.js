@@ -11,6 +11,7 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+const authenticateJWT = require('../middleware/authentication');
 
 const TextAnnouncement = require('../models/textAnnouncementSchema.js');
 
@@ -18,6 +19,19 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+
+// Add the middleware here
+app.use((req, res, next) => {
+  if (req.body) {
+    for (let key in req.body) {
+      if (typeof req.body[key] === 'string') {
+        req.body[key] = req.body[key].toLowerCase();
+      }
+    }
+  }
+  next();
+});
 
 // console.log(process.env.MONGO_URI);
 mongoose
@@ -191,6 +205,7 @@ app.post("/login", async (req, res) => {
   try {
     const db = mongoose.connection;
     const { email, password } = req.body;
+
     const user = await db.collection("active").findOne({ email });
 
     if (!user) {
@@ -224,7 +239,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get('/announcements', async (req, res) => {
+app.get('/announcements', authenticateJWT, async (req, res) => {
   try {
     const db = mongoose.connection;
     const announcements = await db.collection('announcements').find({}).toArray();
@@ -235,7 +250,7 @@ app.get('/announcements', async (req, res) => {
   }
 });
 
-app.post('/announcements', async (req, res) => {
+app.post('/announcements',async (req, res) => {
   try {
     const db = mongoose.connection;
     const { title, content, author } = req.body;
@@ -252,5 +267,22 @@ app.post('/announcements', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error creating announcement' });
+  }
+});
+
+app.get("/validateToken/:token", async (req, res) => {
+  const { token } = req.params;
+  try {
+    const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    const user = await db.collection("active").findOne({ _id: mongoose.Types.ObjectId(payload.id), sessions: token });
+    if (user) {
+      res.status(200).json({ valid: true });
+    } else {
+      // If the token is not valid or not in the database, remove it from the user's client
+      res.status(200).json({ valid: false, message: "Token is not valid. Please log in again." });
+    }
+  } catch (error) {
+    // If the token is not valid or not in the database, remove it from the user's client
+    res.status(200).json({ valid: false, message: "Token is not valid. Please log in again." });
   }
 });
