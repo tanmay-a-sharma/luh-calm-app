@@ -20,6 +20,8 @@ function RegisterScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [pledgeClass, setPledgeClass] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [emailStatus, setEmailStatus] = useState(null);
 
   const handleRegister = () => {
     const user = {
@@ -28,63 +30,50 @@ function RegisterScreen({ navigation }) {
       email: email,
       password: password,
       confirmedPassword: confirmedPassword,
-      
     };
 
     axios
-      .post("http://localhost:8000/register", user)
-      .then((response) => {
-        console.log(response);
-        Alert.alert(
-          "Registration successful:",
-          "You have been registered successfully"
-        );
-        setName("");
-        setEmail("");
-        setPassword("");
-        setConfirmedPassword("");
-        setPledgeClass("");
-      })
-      .catch((error) => {
-        Alert.alert(
-          "registration failed",
-          "an error occurred while registering"
-        );
-        console.log("registration failed on screen", error);
-      });
+        .post("http://localhost:8000/register", user)
+        .then((response) => {
+          console.log(response);
+          Alert.alert(
+              "Registration successful:",
+              "You have been registered successfully"
+          );
+          setName("");
+          setEmail("");
+          setPassword("");
+          setConfirmedPassword("");
+          setPledgeClass("");
+          setErrorMessage("");
+          setEmailStatus('success');
+        })
+        .catch((error) => {
+          console.log("registration failed on screen", error);
+          setErrorMessage(error.response.data.message);
+          setEmailStatus('error');
 
-    // axios.get("http")
-      
+          if (error.response.data.message === 'You already have an account!') {
+            // Handle email already in use error
+            Alert.alert(
+                "Registration failed",
+                "The email you entered is already in use."
+            );
+          } else if (error.response.data.message === 'Your passwords are not the same') {
+            // Handle password error
+            Alert.alert(
+                "Registration failed",
+                "There was an error with the password you entered."
+            );
+          } else {
+            // Handle other errors
+            Alert.alert(
+                "Registration failed",
+                error.response.data.message
+            );
+          }
+        });
   };
-
-  // const handleRegister = async () => {
-  //   try {
-  //     const response = await fetch('https://your-backend-api.com/login', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ name, email, password, confirmPassword, pledgeClass}),
-  //     });
-
-  //     const data = await response.json();
-
-  //     if (response.ok) {
-  //       // Handle successful login, e.g., navigate to another screen or store token
-  //       console.log('Login successful:', data);
-  //       // Example: navigation.navigate('ProfileScreen');
-  //     } else {
-  //       // Handle login failure
-  //       Alert.alert('Login Failed', data.message || 'Invalid credentials');
-  //     }
-  //   } catch (error) {
-  //     // Handle network errors
-  //     console.error('Login error:', error);
-  //     Alert.alert('Error', 'Unable to connect to the server');
-  //   }
-  // };
-
-  // Function to handle the login logic will go here
 
   return (
     <SafeAreaView style={styles.container}>
@@ -157,6 +146,17 @@ function RegisterScreen({ navigation }) {
           >
             <Text style={styles.registerButtonText}>Register</Text>
           </TouchableOpacity>
+
+          {emailStatus === 'success' && (
+              <View style={styles.successContainer}>
+                <Text style={styles.successText}>Verify profile first with your email</Text>
+              </View>
+          )}
+          {emailStatus === 'error' && (
+              <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>{errorMessage}</Text>
+              </View>
+          )}
         </View>
 
         </ScrollView>
@@ -243,6 +243,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center', // Centers content when it's smaller than screen
     alignItems: 'center', // Aligns content horizontally
     paddingHorizontal:10,
+  },
+  successContainer: {
+    backgroundColor: "rgba(0, 255, 0, 0.5)", // Green color with 50% opacity
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  successText: {
+    color: "black",
+    textAlign: "center",
+  },
+  errorContainer: {
+    backgroundColor: "rgba(255, 0, 0, 0.5)", // Red color with 50% opacity
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  errorText: {
+    color: "white",
+    textAlign: "center",
   },
 });
 
