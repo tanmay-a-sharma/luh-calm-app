@@ -44,7 +44,7 @@ const User = require('../models/ActiveModel.js');
 app.post("/register", async (req, res) => {
     let verificationToken;
     try {
-        const {name, pledgeClass, email, password, confirmedPassword} = req.body;
+        const {name, pledgeClass, email, password, confirmedPassword, activeSemesters} = req.body;
 
         // checking for user of email log
         console.log(`Checking for existing user with email: ${email}`);
@@ -92,6 +92,7 @@ app.post("/register", async (req, res) => {
             email: email,
             password: hashedPassword,
             verificationToken: verificationToken,
+            activeSemesters: activeSemesters,
         });
 
         // if (bcrypt.compare(password, newUser.password)) {

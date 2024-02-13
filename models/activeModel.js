@@ -56,6 +56,7 @@ const activeSchema = new mongoose.Schema(
         },
         activeSemesters: {
             type: Number,
+            required: [true, "Please add the number of active semesters"],
 
         },
         sessions: {

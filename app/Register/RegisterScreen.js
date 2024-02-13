@@ -22,6 +22,27 @@ function RegisterScreen({navigation}) {
     const [errorMessage, setErrorMessage] = useState(null);
     const [emailStatus, setEmailStatus] = useState(null);
 
+    const pledgeClassToSemesters = (pledgeClass) =>{
+        switch (pledgeClass) {
+            case 'Fall 23':
+                return 1;
+
+            case 'Spring23':
+                return 2;
+            case 'Fall22':
+                return 3;
+            case 'Spring22':
+                return 4;
+            case 'Fall21':
+                return 5;
+            case 'Spring21':
+                return 6;
+            default:
+                return 0;
+        }
+
+    }
+
     const handleRegister = () => {
         const user = {
             name: name,
@@ -29,6 +50,7 @@ function RegisterScreen({navigation}) {
             email: email,
             password: password,
             confirmedPassword: confirmedPassword,
+            activeSemesters: pledgeClassToSemesters(pledgeClass),
         };
 
         axios
@@ -73,6 +95,8 @@ function RegisterScreen({navigation}) {
                 }
             });
     };
+
+
 
     return (
         <SafeAreaView style={styles.container}>
